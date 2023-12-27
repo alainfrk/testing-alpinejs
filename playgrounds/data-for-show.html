@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Testing Alpine.js" />
+    <link rel="stylesheet" href="../style.css" />
+    <script defer src="data-for-show.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <title>x-data / x-for / x-show</title>
+    <style>
+      [x-cloak] {
+        display: none !important;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <a class="a-btn" href="../index.html">Index</a>
+      <hr />
+    </nav>
+    <h1>x-data / x-for / x-show</h1>
+
+    <article>
+      <h2>Notes</h2>
+      <li>By default, states in x-data are not shared between components</li>
+      <li>if init() is declared in a function used in x-data, no need to use x-init</li>
+      <li>key in loops apparently works like in React</li>
+      <li>for x-show, pay attention to x-cloak (both inline and style)</li>
+      <li>check x-transition to quickly modify animation on x-show</li>
+    </article>
+    <div class="item" x-data="{clangs : ['C', 'C++', 'C#'], otherlangs : ['Python', 'PHP', 'Java']}">
+      <h3>One array</h3>
+      <template x-for="clang in clangs">
+        <p class="a-btn" x-text="clang"></p>
+      </template>
+      <h3>Another array</h3>
+      <template x-for="otherlang in otherlangs">
+        <p class="a-btn" x-text="otherlang"></p>
+      </template>
+    </div>
+    <div class="item" x-data="{...jsframeworks()}">
+      <h3>x-data using js object in js file</h3>
+      <template x-for="framework in frameworks" :key="framework.name">
+        <a class="a-btn" :href="framework.url" x-text="framework.name" target="_blank"></a>
+      </template>
+    </div>
+    <div class="item" x-data="{ links: [] }" x-init="links = await (await fetch('./links.json')).json()">
+      <h3>x-data using inline fetch method</h3>
+      <template x-for="link in links" :key="link.id">
+        <a class="a-btn" :href="link.url" x-text="link.name"></a>
+      </template>
+    </div>
+    <div class="item" x-data="thisComponentData('./links.json', 'x-data using dedicated function')">
+      <h3 x-text="txt"></h3>
+      <template x-for="link in fetchedData" :key="link.id">
+        <a class="a-btn" :href="link.url" x-text="link.name"></a>
+      </template>
+    </div>
+    <div class="item" x-data="{showAlpine : false}">
+      <button x-on:click="showAlpine = ! showAlpine">Show/hide Alpine website</button>
+      <br />
+      <a
+        class="a-btn"
+        href="https://alpinejs.dev/"
+        target="_blank"
+        x-show="showAlpine"
+        x-cloak
+        x-transition.duration.500ms
+        >Alpine.js</a
+      >
+    </div>
+  </body>
+</html>

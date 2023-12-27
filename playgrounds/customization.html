@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="alpine.js demo" />
+    <link rel="stylesheet" href="../style.css" />
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/persist@3.x.x/dist/cdn.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <title>Style customization and saving</title>
+  </head>
+  <body>
+    <nav>
+      <a class="a-btn" href="../index.html">Index</a>
+      <hr />
+    </nav>
+    <h1>Style customization and saving</h1>
+    <article>
+      <h2>Notes</h2>
+      <li>
+        Using the plugin Persist which saves selected values in localStorage (sessionStorage is possible too)
+        <a class="a-btn" href="https://alpinejs.dev/plugins/persist">Persist</a>
+      </li>
+      <li>x-bind to set html attributes, shorthand is ":"</li>
+    </article>
+    <br />
+    <div>
+      <h3>Default item style</h3>
+      <div class="item">
+        <h3>An item</h3>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere quis, vitae ut ducimus voluptatem maiores.
+        </p>
+        <button>Click</button>
+      </div>
+    </div>
+    <div>
+      <h3>Custom item style</h3>
+      <div x-data="{ itemBgColor: $persist('#333344'), itemColor: $persist('#eeeeee') }" id="customizer">
+        <div class="item" :style="{ 'background-color': itemBgColor, 'color': itemColor, 'border-color' : itemColor }">
+          <h3>An item</h3>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere quis, vitae ut ducimus voluptatem maiores.
+          </p>
+          <button :style="{ 'background-color': itemColor, 'color': itemBgColor }">Click</button>
+        </div>
+        <div id="customizer-menu">
+          <input id="input-bg-color" type="color" x-model="itemBgColor" />
+          <p>Background color</p>
+          <br />
+          <input id="input-color" type="color" x-model="itemColor" />
+          <p>Text & border color</p>
+          <br />
+          <button x-on:click="localStorage.clear(); itemBgColor = '#333344'; itemColor = '#eeeeee';">
+            Reset Colors
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

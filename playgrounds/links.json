@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "name": "Youtube",
+    "url": "https://www.youtube.com/"
+  },
+  {
+    "id": 2,
+    "name": "Brave",
+    "url": "https://brave.com/"
+  },
+  {
+    "id": 3,
+    "name": "DuckDuckGo",
+    "url": "https://duckduckgo.com/"
+  },
+  {
+    "id": 4,
+    "name": "VS Code",
+    "url": "https://code.visualstudio.com/"
+  },
+  {
+    "id": 5,
+    "name": "NPM",
+    "url": "https://www.npmjs.com/"
+  }
+]
